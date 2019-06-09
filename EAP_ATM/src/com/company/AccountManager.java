@@ -9,14 +9,14 @@ public class AccountManager
     public List<Account> getAccounts()
     {
         //Test list for now, replace with db list
-        accounts.add(new Account("acc1", "12345", 1000));
-        accounts.add(new Account("acc2", "12345", 5000));
-        accounts.add(new Account("acc3", "12345", 8000));
+        accounts.add(new Account("acc1", 12345));
+        accounts.add(new Account("acc2", 12345));
+        accounts.add(new Account("acc3", 12345));
 
         return accounts;
     }
 
-    public Account getAccount(String accountName, String password)
+    public Account getAccount(String accountName, int password)
     {
         for (Account account : accounts)
         {
@@ -41,7 +41,7 @@ public class AccountManager
         return false;
     }
 
-    public void addAccount(String accountName, String password, double balance)
+    public void registerAccount(String accountName, int password)
     {
         if(accountExists(accountName))
         {
@@ -49,7 +49,19 @@ public class AccountManager
             return;
         }
 
-        accounts.add(new Account(accountName, password, balance));
+        accounts.add(new Account(accountName, password));
         //add account to database too
+    }
+
+    public void login(String accountName, int password)
+    {
+        if(accountExists(accountName))
+        {
+            System.out.println("Account exists!");
+
+            return;
+        }
+
+        System.out.println("Account doesn't exist!");
     }
 }

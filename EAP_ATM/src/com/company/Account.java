@@ -1,23 +1,28 @@
 package com.company;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Account
 {
     private String name;
-    private String password;
-    private double balance;
+    private int password;
+    public List<Deposit> depositList;
 
-    public Account(String name, String password, double balance)
+    public Account(String name, int password)
     {
         this.name = Objects.requireNonNull(name);
         this.password = Objects.requireNonNull(password);
-        this.balance = balance;
     }
 
-    public boolean isMatching(String name, String password)
+    public boolean isMatching(String name, int password)
     {
         return Objects.equals(this.name, name) && Objects.equals(this.password, password);
+    }
+
+    public void AddDepositToAccount(Deposit depositToAdd)
+    {
+        depositList.add(depositToAdd);
     }
 
     public boolean accountExists(String name)
