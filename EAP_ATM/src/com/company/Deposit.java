@@ -1,14 +1,16 @@
 package com.company;
 
+import java.util.Objects;
+
 public class Deposit
 {
     private String name;
-    private double balance;
+    private double funds;
 
-    public Deposit(String depositName, double depositBalance)
+    public Deposit(String depositName)
     {
         name = depositName;
-        balance = depositBalance;
+        funds = 0;
     }
 
     public String getName()
@@ -23,11 +25,27 @@ public class Deposit
 
     public double getBalance()
     {
-        return balance;
+        return funds;
     }
 
-    public void addBalance(double balanceToAdd)
+    public void addFunds(double balanceToAdd)
     {
-        balance += balanceToAdd;
+        funds += balanceToAdd;
+    }
+
+    public void withdrawFunds(double fundsToDecrease)
+    {
+        if(fundsToDecrease >= funds)
+        {
+            funds = 0;
+            return;
+        }
+
+        funds -= fundsToDecrease;
+    }
+
+    public boolean depositExists(String name)
+    {
+        return Objects.equals(this.name, name);
     }
 }
