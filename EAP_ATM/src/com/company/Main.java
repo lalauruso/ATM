@@ -1,5 +1,8 @@
 package com.company;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,39 +28,34 @@ public class Main
 
         ConsoleReader consoleReader = new ConsoleReader(System.in);
 
-        while(true && !issuedLogout)
-        {
-            while(!loginSuccessful)
-            {
+        new LoginScreen();
+
+        while (true && !issuedLogout) {
+            while (!loginSuccessful) {
                 System.out.println("Press 1 for login with an existing account and 2 for registering a new one.");
 
-                switch (consoleReader.readInt())
-                {
-                    case 1:
-                    {
+                switch (consoleReader.readInt()) {
+                    case 1: {
                         System.out.println("Enter username:");
                         tempUsername = consoleReader.readLine();
 
                         System.out.println("Enter password:");
                         tempPassword = consoleReader.readInt();
 
-                        if(accountManager.login(tempUsername, tempPassword))
-                        {
+                        if (accountManager.login(tempUsername, tempPassword)) {
                             loginSuccessful = true;
                         }
 
                         break;
                     }
-                    case 2:
-                    {
+                    case 2: {
                         System.out.println("Enter username:");
                         tempUsername = consoleReader.readLine();
 
                         System.out.println("Enter password:");
                         tempPassword = consoleReader.readInt();
 
-                        if(accountManager.registerAccount(tempUsername, tempPassword))
-                        {
+                        if (accountManager.registerAccount(tempUsername, tempPassword)) {
                             System.out.println("Enter total funds:");
                             totalFunds = consoleReader.readDouble();
                             accountManager.getAccountByName(tempUsername).setTotalFunds(totalFunds);
@@ -74,10 +72,8 @@ public class Main
 
             currentAccount = accountManager.getAccountByName(tempUsername);
 
-            switch(consoleReader.readInt())
-            {
-                case 1:
-                {
+            switch (consoleReader.readInt()) {
+                case 1: {
                     String tempDepositName;
 
                     System.out.println("Enter deposit name:");
@@ -87,8 +83,7 @@ public class Main
 
                     break;
                 }
-                case 2:
-                {
+                case 2: {
                     String tempDepositName;
                     double fundsToAdd = 0;
 
@@ -97,12 +92,9 @@ public class Main
 
                     currentDeposit = currentAccount.getDepositByName(tempDepositName);
 
-                    if(currentDeposit == null)
-                    {
+                    if (currentDeposit == null) {
                         System.out.println(tempDepositName + " doesn't exist!");
-                    }
-                    else
-                    {
+                    } else {
                         System.out.println("Enter funds to add:");
                         fundsToAdd = consoleReader.readDouble();
 
@@ -112,8 +104,7 @@ public class Main
 
                     break;
                 }
-                case 3:
-                {
+                case 3: {
                     String tempDepositName;
                     double fundsToWithdraw = 0;
 
@@ -122,12 +113,9 @@ public class Main
 
                     currentDeposit = currentAccount.getDepositByName(tempDepositName);
 
-                    if(currentDeposit == null)
-                    {
+                    if (currentDeposit == null) {
                         System.out.println(tempDepositName + " doesn't exist!");
-                    }
-                    else
-                    {
+                    } else {
                         System.out.println("Enter funds to withdraw: ");
                         fundsToWithdraw = consoleReader.readDouble();
 
@@ -137,13 +125,11 @@ public class Main
 
                     break;
                 }
-                case 4:
-                {
+                case 4: {
                     accountManager.printInformation(currentAccount);
                     break;
                 }
-                case 5:
-                {
+                case 5: {
                     String fromTransferDepositName;
                     String toTransferDepositName;
 
@@ -154,23 +140,17 @@ public class Main
 
                     fromTransferDeposit = currentAccount.getDepositByName(fromTransferDepositName);
 
-                    if(fromTransferDeposit == null)
-                    {
+                    if (fromTransferDeposit == null) {
                         System.out.println(fromTransferDepositName + " doesn't exist!");
-                    }
-                    else
-                    {
+                    } else {
                         System.out.println("Enter name of deposit to which you want to transfer:");
                         toTransferDepositName = consoleReader.readLine();
 
                         toTransferDeposit = currentAccount.getDepositByName(toTransferDepositName);
 
-                        if(toTransferDeposit == null)
-                        {
+                        if (toTransferDeposit == null) {
                             System.out.println(toTransferDepositName + " doesn't exist!");
-                        }
-                        else
-                        {
+                        } else {
                             System.out.println("Enter funds to withdraw: ");
                             fundToTransfer = consoleReader.readDouble();
 
@@ -182,13 +162,11 @@ public class Main
 
                     break;
                 }
-                case 6:
-                {
+                case 6: {
                     loginSuccessful = false;
                     break;
                 }
-                case 7:
-                {
+                case 7: {
                     issuedLogout = true;
                     break;
                 }
